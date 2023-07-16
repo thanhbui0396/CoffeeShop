@@ -1,4 +1,5 @@
 import 'package:coffee_shop/units/colors.dart';
+import 'package:coffee_shop/units/dimensions.dart';
 import 'package:flutter/material.dart';
 
 class loginPage extends StatefulWidget {
@@ -25,9 +26,9 @@ class _loginPageState extends State<loginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Login',
-          style: TextStyle(color: Colors.white, fontSize: 30),
+          style: TextStyle(color: Colors.white, fontSize: Dimensions.font30),
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
@@ -35,42 +36,46 @@ class _loginPageState extends State<loginPage> {
       body: Container(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+            padding: EdgeInsets.symmetric(
+                horizontal: Dimensions.width20, vertical: Dimensions.height30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
+                Text(
                   'Let\'s sign you in',
                   style: TextStyle(
                       color: AppColors.textAndButtonColor,
-                      fontSize: 24,
+                      fontSize: Dimensions.font24,
                       fontWeight: FontWeight.w500),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: Dimensions.height10,
                 ),
-                const Text(
+                Text(
                   'Welcom back, you have been mised.',
                   style: TextStyle(
-                    fontSize: 16,
+                    fontSize: Dimensions.font16,
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
+                SizedBox(
+                  height: Dimensions.height40,
                 ),
                 TextField(
                   controller: _emailController,
                   cursorColor: Colors.amber,
-                  decoration: const InputDecoration(
-                    labelStyle: TextStyle(color: AppColors.mainColor),
+                  decoration: InputDecoration(
+                    labelStyle: const TextStyle(color: AppColors.mainColor),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                        borderSide: BorderSide(color: AppColors.mainColor)),
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Dimensions.radius40)),
+                        borderSide:
+                            const BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Email & Phone',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40))),
-                    prefixIcon: Align(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Dimensions.radius40))),
+                    prefixIcon: const Align(
                       widthFactor: 1.0,
                       heightFactor: 1.0,
                       child: Icon(
@@ -80,20 +85,23 @@ class _loginPageState extends State<loginPage> {
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: Dimensions.height20,
                 ),
                 TextField(
                   controller: _passwordController,
                   obscureText: _obscured,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: AppColors.mainColor),
-                    focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40)),
-                        borderSide: BorderSide(color: AppColors.mainColor)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Dimensions.radius40)),
+                        borderSide:
+                            const BorderSide(color: AppColors.mainColor)),
                     labelText: 'Password',
-                    border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(
+                            Radius.circular(Dimensions.radius40))),
                     prefixIcon: const Align(
                       widthFactor: 1.0,
                       heightFactor: 1.0,
@@ -110,79 +118,82 @@ class _loginPageState extends State<loginPage> {
                           _obscured
                               ? Icons.visibility_rounded
                               : Icons.visibility_off_rounded,
-                          size: 20,
+                          size: Dimensions.iconSize20,
                         ),
                       ),
                     ),
                   ),
                 ),
-                const SizedBox(
-                  height: 40,
+                SizedBox(
+                  height: Dimensions.height40,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       onTap: () {},
-                      child: const Text(
+                      child: Text(
                         'Forgot Password ?',
-                        style:
-                            TextStyle(fontSize: 14, color: AppColors.mainColor),
+                        style: TextStyle(
+                            fontSize: Dimensions.font16,
+                            color: AppColors.mainColor),
                       ),
                     ),
                     InkWell(
                         onTap: () {},
                         child: Container(
-                          height: 40,
-                          width: 100,
-                          decoration: const BoxDecoration(
+                          height: Dimensions.height40,
+                          width: Dimensions.width100,
+                          decoration: BoxDecoration(
                               color: AppColors.mainColor,
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(20))),
-                          child: const Center(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(Dimensions.radius20))),
+                          child: Center(
                             child: Text(
                               'Login',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 16),
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: Dimensions.font16),
                             ),
                           ),
                         ))
                   ],
                 ),
-                const SizedBox(
-                  height: 20,
+                SizedBox(
+                  height: Dimensions.height20,
                 ),
-                const Text(
+                Text(
                   'Dont have an account ?',
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(fontSize: Dimensions.font16),
                 ),
-                const SizedBox(
-                  height: 5,
+                SizedBox(
+                  height: Dimensions.height5,
                 ),
                 InkWell(
                     onTap: () {},
-                    child: const SizedBox(
-                      width: 100,
+                    child: SizedBox(
+                      width: Dimensions.width100,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Register',
                               style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 16),
+                                  color: AppColors.mainColor,
+                                  fontSize: Dimensions.font16),
                             ),
                             SizedBox(
-                              width: 5,
+                              width: Dimensions.width5,
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
                               color: AppColors.mainColor,
-                              size: 20,
+                              size: Dimensions.iconSize20,
                             )
                           ]),
                     )),
-                const SizedBox(
-                  height: 30,
+                SizedBox(
+                  height: Dimensions.height30,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -191,7 +202,7 @@ class _loginPageState extends State<loginPage> {
                       shadowColor: Colors.black38,
                       elevation: 5),
                   onPressed: () {},
-                  child: const Row(
+                  child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -199,27 +210,29 @@ class _loginPageState extends State<loginPage> {
                         children: [
                           Icon(
                             Icons.facebook,
-                            size: 30,
+                            size: Dimensions.iconSize30,
                             color: Colors.blue,
                           ),
                           SizedBox(
-                            width: 15,
+                            width: Dimensions.width15,
                           ),
                           Text(
                             'Login with facebook',
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.font16),
                           )
                         ],
                       ),
-                      Icon(
+                      const Icon(
                         Icons.keyboard_arrow_right_outlined,
                         color: Colors.black,
                       )
                     ],
                   ),
                 ),
-                const SizedBox(
-                  height: 10,
+                SizedBox(
+                  height: Dimensions.height10,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -238,16 +251,18 @@ class _loginPageState extends State<loginPage> {
                             child: Image.asset(
                               'assets/image/logo_google.png',
                               fit: BoxFit.fitWidth,
-                              height: 25,
-                              width: 25,
+                              height: Dimensions.height25,
+                              width: Dimensions.width25,
                             ),
                           ),
-                          const SizedBox(
-                            width: 15,
+                          SizedBox(
+                            width: Dimensions.width15,
                           ),
-                          const Text(
+                          Text(
                             'Login with Google',
-                            style: TextStyle(color: Colors.black, fontSize: 16),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontSize: Dimensions.font16),
                           )
                         ],
                       ),
