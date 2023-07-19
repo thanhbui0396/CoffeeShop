@@ -1,5 +1,7 @@
+import 'package:coffee_shop/card/hot_deals_products.dart';
+import 'package:coffee_shop/card/new_products_card.dart';
+import 'package:coffee_shop/card/voucher_card.dart';
 import 'package:coffee_shop/page/home/home_page/widget/home_slider.dart';
-import 'package:coffee_shop/page/home/home_page/widget/products_new.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -239,7 +241,7 @@ class HomePage extends StatelessWidget {
           children: [
             const HomeSlider(),
             const SizedBox(
-              height: 10,
+              height: 20,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -271,7 +273,149 @@ class HomePage extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const ProductsNew(),
+            SizedBox(
+              height: 210,
+              width: double.infinity,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: 10,
+                  );
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return const NewProductsCard();
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Hot deals',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.mainColor),
+                ),
+                InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: 40,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                          color: AppColors.mainColor,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 210,
+              width: double.infinity,
+              child: ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: 4,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: 10,
+                  );
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return const HotDealsProducts();
+                },
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Combo',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.mainColor),
+                ),
+                InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: 40,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                          color: AppColors.mainColor,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Your voucher',
+                  style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.w500,
+                      color: AppColors.mainColor),
+                ),
+                InkWell(
+                    onTap: () {},
+                    child: Container(
+                      height: 40,
+                      width: 80,
+                      decoration: const BoxDecoration(
+                          color: AppColors.mainColor,
+                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                      child: const Center(
+                        child: Text(
+                          'See all',
+                          style: TextStyle(color: Colors.white, fontSize: 16),
+                        ),
+                      ),
+                    )),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            SizedBox(
+              height: 400,
+              width: double.infinity,
+              child: ListView.separated(
+                itemCount: 4,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    width: 10,
+                  );
+                },
+                itemBuilder: (BuildContext context, int index) {
+                  return const VoucherCard();
+                },
+              ),
+            ),
           ],
         ),
       ),
