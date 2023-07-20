@@ -1,8 +1,12 @@
+import 'package:coffee_shop/models/data_regis.dart';
+import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/units/colors.dart';
-import 'package:coffee_shop/units/dimensions.dart';
+
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class RegisPage extends StatefulWidget {
+  static const routerName = '/regisPage';
   const RegisPage({Key? key}) : super(key: key);
 
   @override
@@ -24,17 +28,38 @@ class _RegisPageState extends State<RegisPage> {
       TextEditingController();
   bool _obscured = true;
 
+  void handleRegis() {
+    final email = _emailController.text;
+    final name = '${_firstnameController.text} ${_lastnameController.text}';
+    final password = _passwordController.text;
+    final rePassword = _confirmPasswordController.text;
+    const group_id = '64b8be54b8426f15351e5837';
+    const id_app = '648deb5c4992aaaa9b8a165d';
+    if (email.isNotEmpty && password.isNotEmpty && password == rePassword) {
+      DataRegis dataRegis = DataRegis(
+        email: email,
+        name: name,
+        password: password,
+        rePassword: rePassword,
+        group_id: group_id,
+        id_app: id_app,
+      );
+
+      Provider.of<AuthProvider>(context, listen: false).register(dataRegis);
+    }
+  }
+
   void _toggleObscured() {
     setState(() {
       _obscured = !_obscured; // Prevents focus if tap on eye
     });
   }
 
-  bool _obscuredConfirm = true;
+  bool obscuredConfirm = true;
 
   void _toggleObscuredConfirm() {
     setState(() {
-      _obscuredConfirm = !_obscuredConfirm; // Prevents focus if tap on eye
+      obscuredConfirm = !obscuredConfirm; // Prevents focus if tap on eye
     });
   }
 
@@ -42,168 +67,155 @@ class _RegisPageState extends State<RegisPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Register',
-          style: TextStyle(color: Colors.white, fontSize: Dimensions.font30),
+          style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
         leading: BackButton(
           color: Colors.white,
-          style: ButtonStyle(
-              iconSize: MaterialStatePropertyAll(Dimensions.iconSize30)),
-          onPressed: () {},
+          style: const ButtonStyle(iconSize: MaterialStatePropertyAll(30)),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: Container(
         child: SingleChildScrollView(
-          padding: EdgeInsets.symmetric(
-              horizontal: Dimensions.width20, vertical: Dimensions.height30),
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Center(
+              const Center(
                 child: Text(
                   'Great to see you here!',
                   style: TextStyle(
                       color: AppColors.textAndButtonColor,
-                      fontSize: Dimensions.font24,
+                      fontSize: 24,
                       fontWeight: FontWeight.w500),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height10,
+              const SizedBox(
+                height: 10,
               ),
-              SizedBox(
-                width: Dimensions.width230,
+              const SizedBox(
+                width: 230,
                 child: Center(
                   child: Text(
                     'Let\'t set up your account in just a couple of steps.',
                     maxLines: 2,
                     textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: Dimensions.font16),
+                    style: TextStyle(fontSize: 16),
                   ),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height30,
+              const SizedBox(
+                height: 30,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 SizedBox(
-                    width: Dimensions.width120,
-                    height: Dimensions.height60,
+                    width: 120,
+                    height: 60,
                     child: TextField(
                       controller: _firstnameController,
                       cursorColor: Colors.amber,
-                      decoration: InputDecoration(
-                        labelStyle: const TextStyle(color: AppColors.mainColor),
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: AppColors.mainColor),
                         focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.iconSize30)),
-                            borderSide:
-                                const BorderSide(color: AppColors.mainColor)),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderSide: BorderSide(color: AppColors.mainColor)),
                         hoverColor: AppColors.mainColor,
                         labelText: 'Firstname',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.iconSize30))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                       ),
                     )),
-                SizedBox(
-                  width: Dimensions.width20,
+                const SizedBox(
+                  width: 20,
                 ),
                 Expanded(
                   child: SizedBox(
-                    width: Dimensions.width100,
-                    height: Dimensions.height60,
+                    width: 100,
+                    height: 60,
                     child: TextField(
                       controller: _lastnameController,
                       cursorColor: Colors.amber,
-                      decoration: InputDecoration(
-                        labelStyle: const TextStyle(color: AppColors.mainColor),
+                      decoration: const InputDecoration(
+                        labelStyle: TextStyle(color: AppColors.mainColor),
                         focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.iconSize30)),
-                            borderSide:
-                                const BorderSide(color: AppColors.mainColor)),
+                            borderRadius: BorderRadius.all(Radius.circular(30)),
+                            borderSide: BorderSide(color: AppColors.mainColor)),
                         hoverColor: AppColors.mainColor,
                         labelText: 'Lastname',
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.all(
-                                Radius.circular(Dimensions.iconSize30))),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(30))),
                       ),
                     ),
                   ),
                 ),
               ]),
-              SizedBox(
-                height: Dimensions.height10,
+              const SizedBox(
+                height: 10,
               ),
               SizedBox(
-                height: Dimensions.height60,
+                height: 60,
                 child: TextField(
                   controller: _emailController,
                   cursorColor: Colors.amber,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: AppColors.mainColor),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: AppColors.mainColor),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Email',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30))),
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                   ),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height10,
+              const SizedBox(
+                height: 10,
               ),
               SizedBox(
                 height: 60,
                 child: TextField(
                   controller: _phoneController,
                   cursorColor: Colors.amber,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: AppColors.mainColor),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: AppColors.mainColor),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.height30)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Phone number',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30))),
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                   ),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height10,
+              const SizedBox(
+                height: 10,
               ),
               SizedBox(
-                height: Dimensions.height60,
+                height: 60,
                 child: TextField(
                   obscureText: _obscured,
                   controller: _passwordController,
                   cursorColor: Colors.amber,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: AppColors.mainColor),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                    focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30))),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                       child: GestureDetector(
@@ -212,60 +224,55 @@ class _RegisPageState extends State<RegisPage> {
                           _obscured
                               ? Icons.visibility_rounded
                               : Icons.visibility_off_rounded,
-                          size: Dimensions.iconSize20,
+                          size: 20,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height10,
+              const SizedBox(
+                height: 10,
               ),
               SizedBox(
-                height: Dimensions.height60,
+                height: 60,
                 child: TextField(
-                  obscureText: _obscuredConfirm,
+                  obscureText: obscuredConfirm,
                   controller: _confirmPasswordController,
                   cursorColor: Colors.amber,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: AppColors.mainColor),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                    focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Confirm password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.iconSize30))),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(30))),
                     suffixIcon: Padding(
                       padding: const EdgeInsets.fromLTRB(0, 0, 4, 0),
                       child: GestureDetector(
                         onTap: _toggleObscuredConfirm,
                         child: Icon(
-                          _obscuredConfirm
+                          obscuredConfirm
                               ? Icons.visibility_rounded
                               : Icons.visibility_off_rounded,
-                          size: Dimensions.iconSize20,
+                          size: 20,
                         ),
                       ),
                     ),
                   ),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height30,
+              const SizedBox(
+                height: 30,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Sign up',
-                    style: TextStyle(
-                        fontSize: Dimensions.font30,
-                        fontWeight: FontWeight.w300),
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.w300),
                   ),
                   Ink(
                     decoration: const ShapeDecoration(
@@ -273,46 +280,47 @@ class _RegisPageState extends State<RegisPage> {
                       shape: CircleBorder(),
                     ),
                     child: IconButton(
-                      iconSize: Dimensions.iconSize30,
+                      iconSize: 30,
                       icon: const Icon(Icons.keyboard_arrow_right),
                       color: Colors.white,
-                      onPressed: () {},
+                      onPressed: handleRegis,
                     ),
                   ),
                 ],
               ),
-              SizedBox(
-                height: Dimensions.height40,
+              const SizedBox(
+                height: 40,
               ),
-              Center(
+              const Center(
                 child: Text(
                   'Do you have an account?',
-                  style: TextStyle(fontSize: Dimensions.font16),
+                  style: TextStyle(fontSize: 16),
                 ),
               ),
-              SizedBox(
-                height: Dimensions.height5,
+              const SizedBox(
+                height: 5,
               ),
               InkWell(
-                  onTap: () {},
-                  child: SizedBox(
-                    width: Dimensions.width90,
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: const SizedBox(
+                    width: 90,
                     child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             'Sign in',
                             style: TextStyle(
-                                color: AppColors.mainColor,
-                                fontSize: Dimensions.font16),
+                                color: AppColors.mainColor, fontSize: 16),
                           ),
                           SizedBox(
-                            width: Dimensions.width5,
+                            width: 5,
                           ),
                           Icon(
                             Icons.keyboard_arrow_right,
                             color: AppColors.mainColor,
-                            size: Dimensions.iconSize20,
+                            size: 20,
                           )
                         ]),
                   )),

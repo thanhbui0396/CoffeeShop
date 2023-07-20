@@ -3,18 +3,33 @@ import 'package:coffee_shop/page/home/cart_page/cart_page.dart';
 import 'package:coffee_shop/page/home/home_page/homePage.dart';
 import 'package:coffee_shop/page/home/products_page/products_page.dart';
 import 'package:coffee_shop/page/home/voucher_page/voucher_page.dart';
+import 'package:coffee_shop/page/login_and_regis/login/loginPage.dart';
+import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class HomeMain extends StatefulWidget {
-  const HomeMain({super.key});
+class HomeMain extends StatelessWidget {
+  static const routerName = '/homeMain';
+  const HomeMain({Key? key}) : super(key: key);
 
   @override
-  State<HomeMain> createState() => _HomeMainState();
+  Widget build(BuildContext context) {
+    return Consumer<AuthProvider>(builder: (context, auth, child) {
+      return auth.isAuth ? const Home() : const LoginPage();
+    });
+  }
 }
 
-class _HomeMainState extends State<HomeMain> {
+class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   int selectedIndex = 0;
   static const List<Widget> widgetOptions = <Widget>[
     HomePage(),

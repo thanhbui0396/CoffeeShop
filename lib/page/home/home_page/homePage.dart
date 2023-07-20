@@ -2,8 +2,10 @@ import 'package:coffee_shop/card/hot_deals_products.dart';
 import 'package:coffee_shop/card/new_products_card.dart';
 import 'package:coffee_shop/card/voucher_card.dart';
 import 'package:coffee_shop/page/home/home_page/widget/home_slider.dart';
+import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -137,7 +139,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
             ),
-            const Positioned(
+            Positioned(
                 right: 20,
                 bottom: 0,
                 child: SizedBox(
@@ -146,16 +148,20 @@ class HomePage extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Text(
+                      const Text(
                         'Log out',
                         style: TextStyle(
                             fontSize: 18, fontWeight: FontWeight.w500),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 10,
                       ),
                       InkWell(
-                        child: Icon(
+                        onTap: () {
+                          Provider.of<AuthProvider>(context, listen: false)
+                              .logout();
+                        },
+                        child: const Icon(
                           Icons.logout,
                           size: 22,
                         ),

@@ -1,15 +1,18 @@
+import 'package:coffee_shop/page/login_and_regis/regis/regisPage.dart';
+import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/units/colors.dart';
-import 'package:coffee_shop/units/dimensions.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class loginPage extends StatefulWidget {
-  const loginPage({Key? key}) : super(key: key);
+class LoginPage extends StatefulWidget {
+  static const routerName = '/loginPage';
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
-  State<loginPage> createState() => _loginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
-class _loginPageState extends State<loginPage> {
+class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -18,17 +21,27 @@ class _loginPageState extends State<loginPage> {
 
   void _toggleObscured() {
     setState(() {
-      _obscured = !_obscured; // Prevents focus if tap on eye
+      _obscured = !_obscured;
+      // Prevents focus if tap on eye
     });
+  }
+
+  void handleLogin() {
+    final String username = _emailController.text;
+    final String password = _passwordController.text;
+    if (username.isNotEmpty && password.isNotEmpty) {
+      Provider.of<AuthProvider>(context, listen: false)
+          .login(username, password);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Login',
-          style: TextStyle(color: Colors.white, fontSize: Dimensions.font30),
+          style: TextStyle(color: Colors.white, fontSize: 30),
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
@@ -36,46 +49,42 @@ class _loginPageState extends State<loginPage> {
       body: Container(
         child: SingleChildScrollView(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: Dimensions.width20, vertical: Dimensions.height30),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(
+                const Text(
                   'Let\'s sign you in',
                   style: TextStyle(
                       color: AppColors.textAndButtonColor,
-                      fontSize: Dimensions.font24,
+                      fontSize: 24,
                       fontWeight: FontWeight.w500),
                 ),
-                SizedBox(
-                  height: Dimensions.height10,
+                const SizedBox(
+                  height: 10,
                 ),
-                Text(
+                const Text(
                   'Welcom back, you have been mised.',
                   style: TextStyle(
-                    fontSize: Dimensions.font16,
+                    fontSize: 16,
                   ),
                 ),
-                SizedBox(
-                  height: Dimensions.height40,
+                const SizedBox(
+                  height: 40,
                 ),
                 TextField(
                   controller: _emailController,
                   cursorColor: Colors.amber,
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(color: AppColors.mainColor),
+                  decoration: const InputDecoration(
+                    labelStyle: TextStyle(color: AppColors.mainColor),
                     focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.radius40)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     hoverColor: AppColors.mainColor,
                     labelText: 'Email & Phone',
                     border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.radius40))),
-                    prefixIcon: const Align(
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
+                    prefixIcon: Align(
                       widthFactor: 1.0,
                       heightFactor: 1.0,
                       child: Icon(
@@ -85,23 +94,20 @@ class _loginPageState extends State<loginPage> {
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: Dimensions.height20,
+                const SizedBox(
+                  height: 20,
                 ),
                 TextField(
                   controller: _passwordController,
                   obscureText: _obscured,
                   decoration: InputDecoration(
                     labelStyle: const TextStyle(color: AppColors.mainColor),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.radius40)),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor)),
+                    focusedBorder: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40)),
+                        borderSide: BorderSide(color: AppColors.mainColor)),
                     labelText: 'Password',
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                            Radius.circular(Dimensions.radius40))),
+                    border: const OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40))),
                     prefixIcon: const Align(
                       widthFactor: 1.0,
                       heightFactor: 1.0,
@@ -118,82 +124,81 @@ class _loginPageState extends State<loginPage> {
                           _obscured
                               ? Icons.visibility_rounded
                               : Icons.visibility_off_rounded,
-                          size: Dimensions.iconSize20,
+                          size: 20,
                         ),
                       ),
                     ),
                   ),
                 ),
-                SizedBox(
-                  height: Dimensions.height40,
+                const SizedBox(
+                  height: 40,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     InkWell(
                       onTap: () {},
-                      child: Text(
+                      child: const Text(
                         'Forgot Password ?',
-                        style: TextStyle(
-                            fontSize: Dimensions.font16,
-                            color: AppColors.mainColor),
+                        style:
+                            TextStyle(fontSize: 16, color: AppColors.mainColor),
                       ),
                     ),
                     InkWell(
-                        onTap: () {},
+                        onTap: handleLogin,
                         child: Container(
-                          height: Dimensions.height40,
-                          width: Dimensions.width100,
-                          decoration: BoxDecoration(
+                          height: 40,
+                          width: 100,
+                          decoration: const BoxDecoration(
                               color: AppColors.mainColor,
-                              borderRadius: BorderRadius.all(
-                                  Radius.circular(Dimensions.radius20))),
-                          child: Center(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(20))),
+                          child: const Center(
                             child: Text(
                               'Login',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: Dimensions.font16),
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
                             ),
                           ),
                         ))
                   ],
                 ),
-                SizedBox(
-                  height: Dimensions.height20,
+                const SizedBox(
+                  height: 20,
                 ),
-                Text(
+                const Text(
                   'Dont have an account ?',
-                  style: TextStyle(fontSize: Dimensions.font16),
+                  style: TextStyle(fontSize: 16),
                 ),
-                SizedBox(
-                  height: Dimensions.height5,
+                const SizedBox(
+                  height: 5,
                 ),
                 InkWell(
-                    onTap: () {},
-                    child: SizedBox(
-                      width: Dimensions.width100,
+                    onTap: () {
+                      Navigator.pushNamed(context, RegisPage.routerName);
+                    },
+                    child: const SizedBox(
+                      width: 100,
                       child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
                               'Register',
                               style: TextStyle(
-                                  color: AppColors.mainColor,
-                                  fontSize: Dimensions.font16),
+                                  color: AppColors.mainColor, fontSize: 16),
                             ),
                             SizedBox(
-                              width: Dimensions.width5,
+                              width: 5,
                             ),
                             Icon(
                               Icons.keyboard_arrow_right,
                               color: AppColors.mainColor,
-                              size: Dimensions.iconSize20,
+                              size: 20,
                             )
                           ]),
                     )),
-                SizedBox(
-                  height: Dimensions.height30,
+                const SizedBox(
+                  height: 30,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -202,7 +207,7 @@ class _loginPageState extends State<loginPage> {
                       shadowColor: Colors.black38,
                       elevation: 5),
                   onPressed: () {},
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
@@ -210,29 +215,27 @@ class _loginPageState extends State<loginPage> {
                         children: [
                           Icon(
                             Icons.facebook,
-                            size: Dimensions.iconSize30,
+                            size: 30,
                             color: Colors.blue,
                           ),
                           SizedBox(
-                            width: Dimensions.width15,
+                            width: 15,
                           ),
                           Text(
                             'Login with facebook',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: Dimensions.font16),
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           )
                         ],
                       ),
-                      const Icon(
+                      Icon(
                         Icons.keyboard_arrow_right_outlined,
                         color: Colors.black,
                       )
                     ],
                   ),
                 ),
-                SizedBox(
-                  height: Dimensions.height10,
+                const SizedBox(
+                  height: 10,
                 ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
@@ -251,18 +254,16 @@ class _loginPageState extends State<loginPage> {
                             child: Image.asset(
                               'assets/image/logo_google.png',
                               fit: BoxFit.fitWidth,
-                              height: Dimensions.height25,
-                              width: Dimensions.width25,
+                              height: 25,
+                              width: 25,
                             ),
                           ),
-                          SizedBox(
-                            width: Dimensions.width15,
+                          const SizedBox(
+                            width: 15,
                           ),
-                          Text(
+                          const Text(
                             'Login with Google',
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontSize: Dimensions.font16),
+                            style: TextStyle(color: Colors.black, fontSize: 16),
                           )
                         ],
                       ),
