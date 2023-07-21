@@ -17,7 +17,17 @@ class HomeMain extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthProvider>(builder: (context, auth, child) {
-      return auth.isAuth ? const Home() : const LoginPage();
+      return auth.isAuth
+          ? const Home()
+          : FutureBuilder(
+              future: auth.autoLogin(),
+              builder: (BuildContext context, AsyncSnapshot snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                }
+                return snapshot.data ? const Home() : const LoginPage();
+              },
+            );
     });
   }
 }
