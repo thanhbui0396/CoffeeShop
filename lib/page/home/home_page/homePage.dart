@@ -1,3 +1,4 @@
+import 'package:coffee_shop/card/combo_card.dart';
 import 'package:coffee_shop/card/hot_deals_products.dart';
 import 'package:coffee_shop/card/new_products_card.dart';
 import 'package:coffee_shop/card/voucher_card.dart';
@@ -5,6 +6,7 @@ import 'package:coffee_shop/page/home/home_page/widget/home_slider.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,6 +16,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: Drawer(
+        clipBehavior: Clip.hardEdge,
         width: double.infinity,
         surfaceTintColor: AppColors.voucherColor,
         shadowColor: AppColors.voucherColor,
@@ -24,48 +27,51 @@ class HomePage extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: 200,
-                    decoration: const BoxDecoration(
+                    height: 200.h,
+                    decoration: BoxDecoration(
                         color: Colors.orange,
                         borderRadius: BorderRadius.only(
-                            bottomRight: Radius.circular(78))),
-                    child: const Center(
+                            bottomRight: Radius.circular(78.r))),
+                    child: Center(
                       child: ListTile(
                         leading: SizedBox(
-                          height: 70,
-                          width: 70,
-                          child: CircleAvatar(),
+                          height: 70.h,
+                          width: 70.h,
+                          child: const CircleAvatar(),
                         ),
                         title: Text(
                           'Thanh Bui',
                           style: TextStyle(
-                              fontSize: 24,
+                              fontSize: 24.sp,
                               color: Colors.white,
-                              fontWeight: FontWeight.w500),
+                              fontWeight: FontWeight.w700),
                         ),
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.bolt,
+                            Image.asset(
+                              'assets/icon/new.png',
+                              width: 16.h,
+                              height: 16.h,
                               color: Colors.white,
-                              size: 18,
                             ),
                             SizedBox(
-                              width: 3,
+                              width: 3.h,
                             ),
                             Text(
                               'New',
-                              style:
-                                  TextStyle(fontSize: 16, color: Colors.white),
+                              style: TextStyle(
+                                  fontSize: 16.sp,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500),
                             )
                           ],
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(
-                    height: 20,
+                  SizedBox(
+                    height: 20.h,
                   ),
                   Expanded(
                     child: SizedBox(
@@ -73,64 +79,118 @@ class HomePage extends StatelessWidget {
                         children: [
                           const Divider(
                             color: Color(0xFFDADADA),
-                            height: 1,
+                            height: 2,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                           ListTile(
-                            selectedColor: Colors.blue,
-                            selectedTileColor: Colors.blue,
-                            leading: const Icon(Icons.home, size: 30),
-                            title: const Text(
+                            leading: Icon(
+                              Icons.home_outlined,
+                              size: 26.h,
+                              color: Colors.black,
+                            ),
+                            title: Text(
                               'Home',
-                              style: TextStyle(fontSize: 24),
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             onTap: () {
                               // Navigator.pushNamed(context, HomePage.routerName);
                             },
                           ),
                           ListTile(
-                            leading: const Icon(
-                              Icons.library_books,
-                              size: 30,
+                            leading: Image.asset(
+                              'assets/icon/trans_history.png',
+                              width: 30.h,
+                              height: 30.h,
+                              color: Colors.black,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Transaction history',
-                              style: TextStyle(fontSize: 24),
+                              style: TextStyle(
+                                fontSize: 20.sp,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             onTap: () {},
                           ),
                           ListTile(
-                              leading:
-                                  const Icon(Icons.account_circle, size: 30),
-                              title: const Text('My account',
-                                  style: TextStyle(fontSize: 24)),
+                              leading: Image.asset(
+                                'assets/icon/my_account.png',
+                                width: 30.h,
+                                height: 30.h,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                'My account',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               onTap: () {}),
                           ListTile(
-                              leading: const Icon(Icons.favorite, size: 30),
-                              title: const Text('Your favorite',
-                                  style: TextStyle(fontSize: 24)),
+                              leading: Image.asset(
+                                'assets/icon/your_favorite.png',
+                                width: 30.h,
+                                height: 30.h,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                'Your favorite',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               onTap: () {}),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                           const Divider(
                             color: Color(0xFFDADADA),
-                            height: 1,
+                            height: 2,
                           ),
-                          const SizedBox(
-                            height: 10,
+                          SizedBox(
+                            height: 10.h,
                           ),
                           ListTile(
-                              leading: const Icon(Icons.settings, size: 30),
-                              title: const Text('Setting',
-                                  style: TextStyle(fontSize: 24)),
+                              leading: Icon(
+                                Icons.settings_outlined,
+                                size: 26.h,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                'Setting',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               onTap: () {}),
                           ListTile(
-                              leading: const Icon(Icons.contacts, size: 30),
-                              title: const Text('Contact us',
-                                  style: TextStyle(fontSize: 24)),
+                              leading: Image.asset(
+                                'assets/icon/contact_us.png',
+                                width: 30.h,
+                                height: 30.h,
+                                color: Colors.black,
+                              ),
+                              title: Text(
+                                'Contact us',
+                                style: TextStyle(
+                                  fontSize: 20.sp,
+                                  color: Colors.black,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
                               onTap: () {}),
                         ],
                       ),
@@ -140,291 +200,386 @@ class HomePage extends StatelessWidget {
               ),
             ),
             Positioned(
-                right: 20,
-                bottom: 0,
-                child: SizedBox(
-                  height: 40,
-                  width: 150,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      const Text(
-                        'Log out',
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w500),
-                      ),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          Provider.of<AuthProvider>(context, listen: false)
-                              .logout();
-                        },
-                        child: const Icon(
-                          Icons.logout,
-                          size: 22,
-                        ),
-                      )
-                    ],
-                  ),
-                ))
+              right: 20.h,
+              bottom: 20.h,
+              child: TextButton(
+                style:
+                    TextButton.styleFrom(foregroundColor: AppColors.mainColor),
+                child: Row(
+                  children: [
+                    Text(
+                      'Log out',
+                      style: TextStyle(fontSize: 18.sp, color: Colors.black),
+                    ),
+                    SizedBox(
+                      width: 10.h,
+                    ),
+                    Icon(
+                      Icons.logout,
+                      size: 22.h,
+                      color: Colors.black,
+                    )
+                  ],
+                ),
+                onPressed: () {
+                  Provider.of<AuthProvider>(context, listen: false).logout();
+                },
+              ),
+            ),
           ],
         ),
       ),
       appBar: AppBar(
+        toolbarHeight: 150.h,
+        backgroundColor: AppColors.mainColor,
+        elevation: 0,
         leading: Builder(
           builder: (context) => Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 120),
+            padding: EdgeInsets.only(left: 10.r, bottom: 85.r),
             child: IconButton(
-              icon: const Icon(
-                Icons.menu_sharp,
+              // iconSize: 25.h,
+              icon: Image.asset(
+                'assets/icon/drawer.png',
+                width: 35.h,
+                height: 35.h,
                 color: Colors.white,
               ),
               onPressed: () => Scaffold.of(context).openDrawer(),
             ),
           ),
         ),
-        toolbarHeight: 180,
-        backgroundColor: AppColors.mainColor,
         actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 20, bottom: 120),
+          Container(
+            margin: EdgeInsets.only(bottom: 85.r),
             child: Ink(
               decoration: const ShapeDecoration(
                 color: AppColors.buttonColor2,
                 shape: CircleBorder(),
               ),
               child: IconButton(
-                iconSize: 35,
+                iconSize: 25.h,
                 icon: const Icon(Icons.notifications_none_rounded),
                 color: Colors.white,
                 onPressed: () {},
               ),
             ),
+          ),
+          SizedBox(
+            width: 20.w,
           )
         ],
         flexibleSpace: Container(
-          margin: const EdgeInsets.only(top: 130),
-          height: 110,
-          width: 300,
-          child: const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
+          padding: const EdgeInsets.only(left: 25, top: 130).r,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Welcom to,',
+                style: TextStyle(
+                    fontSize: 26.sp,
+                    fontWeight: FontWeight.w500,
+                    color: Colors.white),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+              Text(
+                'KOFEHOLIC',
+                style: TextStyle(
+                    fontSize: 36.sp,
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ],
+          ),
+        ),
+      ),
+      body: Stack(children: [
+        Container(
+          decoration: const BoxDecoration(color: AppColors.mainColor),
+        ),
+        Container(
+          padding: const EdgeInsets.only(top: 20, bottom: 30).r,
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30.r),
+              topRight: Radius.circular(30.r),
+            ),
+          ),
+          child: SingleChildScrollView(
+            clipBehavior: Clip.none,
+            padding: EdgeInsets.symmetric(horizontal: 20.r),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const HomeSlider(),
                 SizedBox(
-                  height: 30,
-                  width: 300,
-                  child: Text(
-                    'Welcom to,',
-                    style: TextStyle(fontSize: 26, color: Colors.white),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  height: 30.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'New',
+                      style: TextStyle(
+                          fontSize: 24.sp,
+                          fontWeight: FontWeight.w500,
+                          color: AppColors.mainColor,
+                          decoration: TextDecoration.underline),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: AppColors.mainColor,
+                        padding: EdgeInsets.all(9.r),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.r),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 210.h,
+                  child: ListView.separated(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 10,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 10.w,
+                      );
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return const NewProductsCard();
+                    },
                   ),
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 20.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Hot ',
+                            style: TextStyle(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.mainColor,
+                                decoration: TextDecoration.underline),
+                          ),
+                          TextSpan(
+                            text: 'deals ',
+                            style: TextStyle(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.mainColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: AppColors.mainColor,
+                        padding: EdgeInsets.all(9.r),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.r),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(
-                  height: 45,
-                  width: 300,
-                  child: Text(
-                    'KOFEHOLIC',
-                    style: TextStyle(fontSize: 40, color: Colors.white),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
+                  height: 30.h,
+                ),
+                SizedBox(
+                  height: 210.h,
+                  child: ListView.separated(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 10.w,
+                      );
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return const HotDealsProducts();
+                    },
                   ),
+                ),
+                SizedBox(
+                  height: 20.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Com',
+                            style: TextStyle(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.mainColor,
+                                decoration: TextDecoration.underline),
+                          ),
+                          TextSpan(
+                            text: 'bo',
+                            style: TextStyle(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.mainColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: AppColors.mainColor,
+                        padding: EdgeInsets.all(9.w),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.r),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 10.h,
+                ),
+                SizedBox(
+                  height: 120.h,
+                  child: ListView.separated(
+                    clipBehavior: Clip.none,
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        width: 10.w,
+                      );
+                    },
+                    itemBuilder: (BuildContext context, int index) {
+                      return const ComboCard();
+                    },
+                  ),
+                ),
+                SizedBox(
+                  height: 30.h,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          TextSpan(
+                            text: 'Your',
+                            style: TextStyle(
+                                fontSize: 24.sp,
+                                fontWeight: FontWeight.w500,
+                                color: AppColors.mainColor,
+                                decoration: TextDecoration.underline),
+                          ),
+                          TextSpan(
+                            text: ' Voucher',
+                            style: TextStyle(
+                              fontSize: 24.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.mainColor,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0,
+                        backgroundColor: AppColors.mainColor,
+                        padding: EdgeInsets.all(9.r),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(50.r),
+                          ),
+                        ),
+                      ),
+                      child: Text(
+                        'See all',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 3.h,
+                ),
+                ListView.separated(
+                  clipBehavior: Clip.none,
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: 4,
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: 10.w,
+                    );
+                  },
+                  itemBuilder: (BuildContext context, int index) {
+                    return const VoucherCard();
+                  },
                 ),
               ],
             ),
           ),
         ),
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsetsDirectional.all(20),
-        child: Column(
-          children: [
-            const HomeSlider(),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'New',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.mainColor),
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: const Center(
-                        child: Text(
-                          'See all',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 210,
-              width: double.infinity,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return const NewProductsCard();
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Hot deals',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.mainColor),
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: const Center(
-                        child: Text(
-                          'See all',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 210,
-              width: double.infinity,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemCount: 4,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return const HotDealsProducts();
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Combo',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.mainColor),
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: const Center(
-                        child: Text(
-                          'See all',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Text(
-                  'Your voucher',
-                  style: TextStyle(
-                      fontSize: 30,
-                      fontWeight: FontWeight.w500,
-                      color: AppColors.mainColor),
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: Container(
-                      height: 40,
-                      width: 80,
-                      decoration: const BoxDecoration(
-                          color: AppColors.mainColor,
-                          borderRadius: BorderRadius.all(Radius.circular(20))),
-                      child: const Center(
-                        child: Text(
-                          'See all',
-                          style: TextStyle(color: Colors.white, fontSize: 16),
-                        ),
-                      ),
-                    )),
-              ],
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: ListView.separated(
-                itemCount: 4,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(
-                    width: 10,
-                  );
-                },
-                itemBuilder: (BuildContext context, int index) {
-                  return const VoucherCard();
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
+      ]),
     );
   }
 }

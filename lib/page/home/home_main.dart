@@ -58,37 +58,44 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: widgetOptions[selectedIndex],
-        bottomNavigationBar: ConvexAppBar(
-          items: const [
-            TabItem(
-              icon: Icon(
-                Icons.home_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
+      body: widgetOptions[selectedIndex],
+      bottomNavigationBar: ConvexAppBar(
+        items: [
+          TabItem(
+            icon: Image.asset(
+              'assets/icon/home.png',
+              color: Colors.white,
             ),
-            TabItem(
-              icon: Icon(
-                Icons.airplane_ticket_outlined,
-                color: Colors.white,
-                size: 30,
-              ),
+          ),
+          TabItem(
+            icon: Image.asset(
+              'assets/icon/voucher.png',
+              color: Colors.white,
             ),
-            TabItem(
-              icon: Icon(Icons.coffee_outlined, color: Colors.white, size: 30),
+          ),
+          TabItem(
+            icon: Image.asset(
+              'assets/icon/product.png',
+              color: Colors.white,
             ),
-            TabItem(
-              icon: Icon(Icons.shopping_cart_outlined,
-                  color: Colors.white, size: 30),
+          ),
+          TabItem(
+            icon: Image.asset(
+              'assets/icon/card.png',
+              color: Colors.white,
             ),
-            TabItem(
-              icon: Icon(Icons.add_outlined, color: Colors.white, size: 30),
+          ),
+          TabItem(
+            icon: Image.asset(
+              'assets/icon/add.png',
+              color: Colors.white,
             ),
-          ],
-          backgroundColor: AppColors.buttonColor2,
-          activeColor: AppColors.mainColor,
-          onTap: _onItemTapped,
-        ));
+          ),
+        ],
+        backgroundColor: AppColors.buttonColor2,
+        activeColor: AppColors.mainColor,
+        onTap: _onItemTapped,
+      ),
+    );
   }
 }
