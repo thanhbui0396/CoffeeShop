@@ -2,15 +2,13 @@ import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class NewProductsCard extends StatelessWidget {
-  const NewProductsCard({
-    Key? key,
-  }) : super(key: key);
-
+class Product extends StatelessWidget {
+  Product({Key? key, required this.isDeal}) : super(key: key);
+  bool isDeal;
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 130.h,
+      width: 130.r,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.all(
@@ -41,18 +39,46 @@ class NewProductsCard extends StatelessWidget {
                       fit: BoxFit.cover),
                 ),
               ),
+              isDeal
+                  ? Container(
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 6.r, vertical: 2.r),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(10.r),
+                        ),
+                        color: const Color(0xFFED4C5C),
+                      ),
+                      child: Text(
+                        '-20%',
+                        style: TextStyle(
+                            fontSize: 13.sp,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.white),
+                      ),
+                    )
+                  : Container(),
               Positioned(
                 right: 5.h,
                 top: 5.h,
-                child: InkWell(
-                  onTap: () {},
-                  child: Container(
-                    decoration: const BoxDecoration(
-                        shape: BoxShape.circle, color: AppColors.buttonColor2),
-                    child: Icon(
-                      Icons.add,
-                      color: Colors.white,
-                      size: 20.r,
+                child: Material(
+                  shape: BeveledRectangleBorder(
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10.r),
+                    ),
+                  ),
+                  clipBehavior: Clip.none,
+                  child: InkWell(
+                    onTap: () {},
+                    child: Ink(
+                      decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: AppColors.buttonColor2),
+                      child: Icon(
+                        Icons.add,
+                        color: Colors.white,
+                        size: 20.r,
+                      ),
                     ),
                   ),
                 ),

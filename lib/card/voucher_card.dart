@@ -92,42 +92,42 @@ class VoucherCard extends StatelessWidget {
                       ),
                     ),
                     Padding(
-                      padding:
-                          const EdgeInsets.only(left: 20, right: 10, bottom: 5)
-                              .r,
+                      padding: const EdgeInsets.only(left: 20, right: 10).r,
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            'expired: 10/1/2021',
-                            style: TextStyle(
-                                color: AppColors.buttonColor2,
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.w400),
+                          Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.only(bottom: 5.r),
+                              child: Text(
+                                'expired: 10/1/2021',
+                                style: TextStyle(
+                                    color: AppColors.buttonColor2,
+                                    fontSize: 10.sp,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
                           ),
-                          InkWell(
-                              onTap: () {},
-                              child: Container(
-                                margin: EdgeInsets.only(bottom: 5.r),
-                                height: 30.h,
-                                width: 85.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.buttonColor2,
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(6.r),
-                                  ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: AppColors.buttonColor2,
+                              elevation: 0,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.all(
+                                  Radius.circular(6.r),
                                 ),
-                                child: Center(
-                                  child: Text(
-                                    'Apply now',
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 14.sp,
-                                        fontWeight: FontWeight.w500),
-                                  ),
-                                ),
-                              ))
+                              ),
+                            ),
+                            child: Text(
+                              'Apply now',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          )
                         ],
                       ),
                     )

@@ -1,8 +1,10 @@
 import 'package:coffee_shop/page/login_and_regis/regis/regisPage.dart';
 import 'package:coffee_shop/providers/auth_provider.dart';
+import 'package:coffee_shop/units/app_image.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,6 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  FocusNode myFocusNode = FocusNode();
   final TextEditingController _emailController = TextEditingController();
 
   final TextEditingController _passwordController = TextEditingController();
@@ -40,13 +43,10 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 130.h - MediaQuery.of(context).padding.top,
         elevation: 0,
-        title: Text(
+        title: const Text(
           'Login',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w400),
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
@@ -57,6 +57,9 @@ class _LoginPageState extends State<LoginPage> {
             decoration: const BoxDecoration(color: AppColors.mainColor),
           ),
           Container(
+            padding:
+                const EdgeInsets.only(left: 25, top: 35, right: 25, bottom: 20)
+                    .r,
             height: double.infinity,
             decoration: BoxDecoration(
               color: Colors.white,
@@ -66,8 +69,6 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             child: SingleChildScrollView(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 20, vertical: 35).r,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -91,105 +92,159 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 60.h,
                   ),
-                  TextField(
-                    controller: _emailController,
-                    cursorColor: AppColors.mainColor,
-                    decoration: InputDecoration(
-                      labelStyle: const TextStyle(color: AppColors.mainColor),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.all(Radius.circular(30.r)),
-                          borderSide:
-                              const BorderSide(color: AppColors.mainColor)),
-                      hoverColor: AppColors.mainColor,
-                      labelText: 'Email & Phone',
-                      border: OutlineInputBorder(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(30.r))),
-                      prefixIcon: const Align(
-                        widthFactor: 1.0,
-                        heightFactor: 1.0,
-                        child: Icon(
-                          Icons.account_circle_outlined,
-                          color: AppColors.textAndButtonColor,
+                  Column(
+                    children: [
+                      SizedBox(
+                        height: 50.h,
+                        child: TextField(
+                          focusNode: myFocusNode,
+                          controller: _emailController,
+                        
+                          cursorColor: AppColors.mainColor,
+                          decoration: InputDecoration(
+                            labelStyle: TextStyle(
+                              color: myFocusNode.hasFocus
+                                  ? AppColors.mainColor
+                                  : const Color(0xFF9D9D9D),
+                            ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(30.r)),
+                              borderSide:
+                                  const BorderSide(color: AppColors.mainColor),
+                            ),
+                            hoverColor: AppColors.mainColor,
+                            labelText: 'Email & Phone',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30.r),
+                              ),
+                            ),
+                            prefixIcon: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(
+                                AppImage.iconAccount,
+                                color: AppColors.textAndButtonColor,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 32.h,
-                  ),
-                  TextField(
-                    controller: _passwordController,
-                    obscureText: _obscured,
-                    cursorColor: AppColors.mainColor,
-                    decoration: InputDecoration(
-                      labelStyle: const TextStyle(color: AppColors.mainColor),
-                      focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30.r),
-                        ),
-                        borderSide:
-                            const BorderSide(color: AppColors.mainColor),
+                      SizedBox(
+                        height: 32.h,
                       ),
-                      hoverColor: AppColors.mainColor,
-                      labelText: 'Password',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(30.r),
+                      SizedBox(
+                        height: 50.h,
+                        child: TextField(
+                          // focusNode: FocusNode(),
+                          controller: _passwordController,
+                          obscureText: _obscured,
+                          cursorColor: AppColors.mainColor,
+                          decoration: InputDecoration(
+                            // labelStyle: const TextStyle(
+                            //   decorationColor: Colors.amber,
+                            // ),
+                            focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30.r),
+                              ),
+                              borderSide:
+                                  const BorderSide(color: AppColors.mainColor),
+                            ),
+                            hoverColor: AppColors.mainColor,
+                            labelText: 'Password',
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(30.r),
+                              ),
+                            ),
+                            prefixIcon: Align(
+                              widthFactor: 1.0,
+                              heightFactor: 1.0,
+                              child: SvgPicture.asset(
+                                AppImage.iconPassword,
+                                color: AppColors.textAndButtonColor,
+                              ),
+                            ),
+                            suffixIcon: Row(
+                              mainAxisAlignment:
+                                  MainAxisAlignment.spaceBetween, // added line
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                InkWell(
+                                  child: Text(
+                                    'Forgot?',
+                                    style: TextStyle(
+                                        color: AppColors.mainColor,
+                                        fontSize: 16.sp,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: _toggleObscured,
+                                  child: Padding(
+                                    padding: EdgeInsets.all(10.r),
+                                    child: SvgPicture.asset(
+                                      _obscured
+                                          ? AppImage.iconEye
+                                          : AppImage.iconEyeSlash,
+                                      fit: BoxFit.cover,
+                                      color: const Color(0xFF9D9D9D),
+                                    ),
+                                  ),
+                                )
+                              ],
+                            ),
+                            suffixIconColor: AppColors.mainColor,
+                          ),
                         ),
                       ),
-                      prefixIcon: const Align(
-                        widthFactor: 1.0,
-                        heightFactor: 1.0,
-                        child: Icon(
-                          Icons.lock_outline,
-                          color: AppColors.textAndButtonColor,
-                        ),
-                      ),
-                      suffixIcon: GestureDetector(
-                        onTap: _toggleObscured,
-                        child: Image.asset(
-                          'assets/icon/hide_pw.png',
-                          color: !_obscured
-                              ? AppColors.mainColor
-                              : const Color(0xFF9D9D9D),
-                        ),
-                      ),
-                      suffixIconColor: AppColors.mainColor,
-                    ),
+                    ],
                   ),
                   SizedBox(
                     height: 80.h,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      InkWell(
-                        onTap: () {},
-                        child: const Text(
-                          'Forgot Password ?',
-                          style: TextStyle(
-                              fontSize: 16, color: AppColors.mainColor),
-                        ),
+                      Text(
+                        'Sign in',
+                        style: TextStyle(
+                            fontSize: 30.sp,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black),
                       ),
                       Container(
                         height: 50.h,
                         width: 50.h,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: AppColors.textAndButtonColor,
-                            boxShadow: [
-                              BoxShadow(
-                                color: AppColors.textAndButtonColor
-                                    .withOpacity(0.54),
-                                blurRadius: 4,
-                                spreadRadius: 0,
-                                offset: const Offset(0, 4),
-                              ),
-                            ]),
-                        child: IconButton(
-                          onPressed: handleLogin,
-                          icon: Image.asset('assets/icon/right.png'),
+                        decoration: BoxDecoration(boxShadow: [
+                          BoxShadow(
+                            color:
+                                AppColors.textAndButtonColor.withOpacity(0.54),
+                            blurRadius: 4,
+                            spreadRadius: 0,
+                            offset: const Offset(0, 4),
+                          ),
+                        ], shape: BoxShape.circle),
+                        child: Center(
+                          child: ElevatedButton(
+                            onPressed: handleLogin,
+                            style: ElevatedButton.styleFrom(
+                              elevation: 0,
+                              shadowColor: AppColors.mainColor,
+                              padding: const EdgeInsets.all(5),
+                              shape: const CircleBorder(),
+                              backgroundColor: AppColors
+                                  .textAndButtonColor, // <-- Button color
+                              foregroundColor:
+                                  AppColors.mainColor, // <-- Splash color
+                            ),
+                            child: Center(
+                              child: SvgPicture.asset(AppImage.iconRight),
+                            ),
+                          ),
                         ),
                       ),
                     ],
@@ -197,154 +252,153 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 25.h,
                   ),
-                  Text(
-                    'Dont have an account ?',
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w400),
+                  Column(
+                    children: [
+                      Text(
+                        'Dont have an account ?',
+                        style: TextStyle(
+                            fontSize: 14.sp, fontWeight: FontWeight.w400),
+                      ),
+                      Material(
+                        color: Colors.white,
+                        child: SizedBox(
+                          width: 90.r,
+                          child: InkWell(
+                            focusColor: AppColors.voucherColor,
+                            highlightColor: AppColors.voucherColor,
+                            onTap: () {
+                              Navigator.pushNamed(
+                                  context, RegisPage.routerName);
+                            },
+                            child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    'Register ',
+                                    style: TextStyle(
+                                        color: AppColors.mainColor,
+                                        fontSize: 14.sp),
+                                  ),
+                                  SvgPicture.asset(
+                                    AppImage.iconChevronright,
+                                    color: AppColors.mainColor,
+                                  ),
+                                ]),
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
-                  // const SizedBox(
-                  //   height: 5,
-                  // ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, RegisPage.routerName);
-                    },
-                    child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'Register ',
-                            style: TextStyle(
-                                color: AppColors.mainColor, fontSize: 14.sp),
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Image.asset(
-                            'assets/icon/right.png',
-                            color: AppColors.mainColor,
-                            height: 14.h,
-                            width: 14.h,
-                          ),
-                        ]),
-                  ),
-
                   SizedBox(
                     height: 42.h,
                   ),
-                  Container(
-                    width: double.infinity,
-                    height: 47.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50.r),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF000000).withOpacity(0.15),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            offset: const Offset(1, 3),
-                          ),
-                        ]),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppColors.mainColor,
-                        shadowColor: Colors.black38,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50.r),
-                          ),
-                        ),
-                      ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Icon(
-                            Icons.facebook,
-                            size: 30,
-                            color: Colors.blue,
-                          ),
-                          SizedBox(
-                            width: 20.h,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Login with facebook',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 47.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.r),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    const Color(0xFF000000).withOpacity(0.15),
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                                offset: const Offset(1, 3),
+                              ),
+                            ]),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            foregroundColor: AppColors.voucherColor,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(50.r),
                               ),
                             ),
                           ),
-                          const Icon(
-                            Icons.arrow_right_alt_outlined,
-                            color: Colors.black,
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 22.h,
-                  ),
-                  Container(
-                    width: double.infinity,
-                    height: 47.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(50.r),
-                        ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: const Color(0xFF000000).withOpacity(0.15),
-                            blurRadius: 5,
-                            spreadRadius: 1,
-                            offset: const Offset(1, 3),
-                          ),
-                        ]),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.white,
-                        foregroundColor: AppColors.mainColor,
-                        shadowColor: Colors.black38,
-                        elevation: 0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(50.r),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SvgPicture.asset(AppImage.iconFacebook),
+                              SizedBox(
+                                width: 20.h,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Login with facebook',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              SvgPicture.asset(AppImage.iconBiArrowRight),
+                            ],
                           ),
                         ),
                       ),
-                      onPressed: () {},
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Image.asset('assets/icon/google.png'),
-                          SizedBox(
-                            width: 20.h,
-                          ),
-                          Expanded(
-                            child: Text(
-                              'Login with google',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 16.sp,
-                                fontWeight: FontWeight.w400,
+                      SizedBox(
+                        height: 22.h,
+                      ),
+                      Container(
+                        height: 47.h,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(
+                              Radius.circular(50.r),
+                            ),
+                            boxShadow: [
+                              BoxShadow(
+                                color:
+                                    const Color(0xFF000000).withOpacity(0.15),
+                                blurRadius: 5,
+                                spreadRadius: 1,
+                                offset: const Offset(1, 3),
+                              ),
+                            ]),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            elevation: 0,
+                            foregroundColor: AppColors.voucherColor,
+                            backgroundColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(50.r),
                               ),
                             ),
                           ),
-                          const Icon(
-                            Icons.arrow_right_alt_outlined,
-                            color: Colors.black,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              SvgPicture.asset(AppImage.iconGoogle),
+                              SizedBox(
+                                width: 20.h,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Login with google',
+                                  style: TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 16.sp,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              ),
+                              SvgPicture.asset(AppImage.iconBiArrowRight),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),

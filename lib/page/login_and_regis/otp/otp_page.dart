@@ -1,8 +1,10 @@
 import 'dart:async';
 
+import 'package:coffee_shop/units/app_image.dart';
 import 'package:coffee_shop/units/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 class OtpPage extends StatefulWidget {
@@ -47,23 +49,13 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 130.h - MediaQuery.of(context).padding.top,
         elevation: 0,
-        title: Text(
-          'OTP Confirm',
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 30.sp,
-              fontWeight: FontWeight.w400),
+        title: const Text(
+          'Otp',
         ),
         centerTitle: true,
         backgroundColor: AppColors.mainColor,
-        leading: BackButton(
-          color: Colors.white,
-          style: ButtonStyle(iconSize: MaterialStatePropertyAll(30.r)),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
       ),
       body: Stack(
         children: [
@@ -80,7 +72,7 @@ class _OtpPageState extends State<OtpPage> {
               ),
             ),
             child: SingleChildScrollView(
-              padding: const EdgeInsets.only(left: 22, right: 22, top: 30).r,
+              padding: const EdgeInsets.only(left: 22, right: 22, top: 35).r,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -93,7 +85,7 @@ class _OtpPageState extends State<OtpPage> {
                     textAlign: TextAlign.center,
                   ),
                   SizedBox(
-                    height: 112.r,
+                    height: 110.h,
                   ),
                   PinCodeTextField(
                       appContext: context,
@@ -151,9 +143,17 @@ class _OtpPageState extends State<OtpPage> {
                               start = 10;
                             });
                           },
-                          child: const Text('Resent >',
-                              style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 14)),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              const Text(
+                                'Resent ',
+                                style: TextStyle(
+                                    color: AppColors.mainColor, fontSize: 14),
+                              ),
+                              SvgPicture.asset(AppImage.iconChevronright)
+                            ],
+                          ),
                         ),
                   SizedBox(
                     height: 70.h,
@@ -180,7 +180,7 @@ class _OtpPageState extends State<OtpPage> {
                             color: Colors.white),
                       ),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

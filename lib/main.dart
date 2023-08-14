@@ -1,3 +1,4 @@
+import 'package:coffee_shop/app/themes/my_theme.dart';
 import 'package:coffee_shop/page/home/home_main.dart';
 import 'package:coffee_shop/page/login_and_regis/login/loginPage.dart';
 import 'package:coffee_shop/page/login_and_regis/otp/otp_page.dart';
@@ -14,15 +15,14 @@ void main(List<String> args) {
         ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: ScreenUtilInit(
-        designSize: const Size(360, 690),
+        designSize: const Size(375, 812),
         // minTextAdapt: true,
         // splitScreenMode: true,
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            // theme: ThemeData(
-            //     fontFamily: 'Quicksand',
-            //     ),
+            themeMode: ThemeMode.light,
+            theme: MyTheme.lightTheme,
             initialRoute: HomeMain.routerName,
             routes: {
               HomeMain.routerName: (context) => const HomeMain(),
